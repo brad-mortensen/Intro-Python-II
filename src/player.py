@@ -2,7 +2,6 @@
 # currently.
 
 class Player:
-  def __init__(self, name, location, inventory):
+  def __init__(self, name, location):
     self.name = name
     self.location = location
-    self.inventory = inventory

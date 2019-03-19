@@ -1,5 +1,5 @@
 from room import Room
-
+from player import Player
 # Declare all the rooms
 
 room = {
@@ -46,3 +46,11 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+player = Player("Billie Bartie", "outside")
+
+while True:
+    print(f"{player.name}\'s location is {player.location}")
+    cmd = input("\nWhat do you want to do: ")
+    if cmd == "q":
+        print("Goodbye!")
+        break
