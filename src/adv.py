@@ -46,7 +46,7 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
-player = Player("Billie Bartie", "outside")
+player = Player("Billie Bartie", room['outside'].name)
 
 while True:
     print(f"{player.name}\'s location is {player.location}")
