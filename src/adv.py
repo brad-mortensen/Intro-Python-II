@@ -57,5 +57,5 @@ while True:
     print(f"{player.current_room.name} >>> {player.current_room.description}")
     cmd = input(f"\nWhat do you want to do {player.name}?")
     if cmd == "q":
-        print("Goodbye!")
+        print("Thanks for Playing!")
         break
