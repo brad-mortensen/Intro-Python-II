@@ -54,7 +54,7 @@ player = Player(None, room['outside'])
 while True:
     if player.name == None:
         player.name = input("Hello traveler, what is your name?")
-    print(f"{player.location.name} >>> {player.location.description}")
+    print(f"{player.current_room.name} >>> {player.current_room.description}")
     cmd = input(f"\nWhat do you want to do {player.name}?")
     if cmd == "q":
         print("Goodbye!")
