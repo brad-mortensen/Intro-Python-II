@@ -1,5 +1,6 @@
 from room import Room
 from player import Player
+from item import Item
 # Declare all the rooms
 
 room = {
@@ -18,7 +19,11 @@ chamber! Sadly, it has already been completely emptied by
 earlier adventurers. The only exit is to the south."""),
 }
 
-
+item = {
+    'sword': Item("Sword", "An Old Broadsword"),
+    'shield': Item("Shield", "For Protection"),
+    'gold': Item("Gold", "A Buncha Dabloons"),
+}
 # Link rooms together
 
 room['outside'].n_to = room['foyer']
@@ -46,11 +51,13 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
-player = Player("Billie Bartie", room['outside'].name)
+player = Player("Billie Bartie", room['outside'])
 
 while True:
-    print(f"{player.name}\'s location is {player.location}")
-    cmd = input("\nWhat do you want to do: ")
+    print(f"{player.location.name} >>> {player.location.description}")
+    cmd = input(f"\nWhat do you want to do {player.name}?")
+    if cmd == "n":
+        player.location.n_to
     if cmd == "q":
         print("Goodbye!")
         break
