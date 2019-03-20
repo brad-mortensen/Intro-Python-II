@@ -60,15 +60,16 @@ def handle_input(length, command):
         print(f"{command} is not a valid input")
 
 def handle_movement(command):
-    print("movement func", command)
-
+    attribute = command.append("_to")
+    if hasattr(Room, attribute):
+        
 while True:
     if player.name == None:
         player.name = input("Hello traveler, what is your name?")
     print(f"{player.current_room}")
     cmd = input(f"\nWhat do you want to do {player.name}?")
     parsed = len(cmd.split(" "))
-    handle_input(parsed, cmd)   
     if cmd == "q":
-        print("Thanks for Playing!")
+        print("thanks for playing")
         break
+    handle_input(parsed, cmd)
