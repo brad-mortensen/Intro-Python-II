@@ -51,19 +51,24 @@ player = Player(None, room['outside'])
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+def handle_input(length, command):
+    if length == 1:
+        print("length of 1", command)
+    elif length == 2:
+        print("length of 2", command)
+    else: 
+        print(f"{command} is not a valid input")
+
+def handle_movement(command):
+    print(command)
+    
 while True:
     if player.name == None:
         player.name = input("Hello traveler, what is your name?")
     print(f"{player.current_room.name} >>> {player.current_room.description}")
     cmd = input(f"\nWhat do you want to do {player.name}?")
-    if cmd == "n":
-        print("going North") # go north
-    if cmd == "s":
-        print("going South") # go South
-    if cmd == "e":
-        print("going East") # go East
-    if cmd == "w":
-        print("going West") # go West    
+    parsed = len(cmd.split(" "))
+    handle_input(parsed, cmd)   
     if cmd == "q":
         print("Thanks for Playing!")
         break
