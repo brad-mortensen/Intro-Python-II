@@ -53,19 +53,19 @@ player = Player(None, room['outside'])
 # If the user enters "q", quit the game.
 def handle_input(length, command):
     if length == 1:
-        print("length of 1", command)
+        handle_movement(command)
     elif length == 2:
         print("length of 2", command)
     else: 
         print(f"{command} is not a valid input")
 
 def handle_movement(command):
-    print(command)
-    
+    print("movement func", command)
+
 while True:
     if player.name == None:
         player.name = input("Hello traveler, what is your name?")
-    print(f"{player.current_room.name} >>> {player.current_room.description}")
+    print(f"{player.current_room}")
     cmd = input(f"\nWhat do you want to do {player.name}?")
     parsed = len(cmd.split(" "))
     handle_input(parsed, cmd)   
