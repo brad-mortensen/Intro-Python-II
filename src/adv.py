@@ -56,6 +56,14 @@ while True:
         player.name = input("Hello traveler, what is your name?")
     print(f"{player.current_room.name} >>> {player.current_room.description}")
     cmd = input(f"\nWhat do you want to do {player.name}?")
+    if cmd == "n":
+        print("going North") # go north
+    if cmd == "s":
+        print("going South") # go South
+    if cmd == "e":
+        print("going East") # go East
+    if cmd == "w":
+        print("going West") # go West    
     if cmd == "q":
         print("Thanks for Playing!")
         break
