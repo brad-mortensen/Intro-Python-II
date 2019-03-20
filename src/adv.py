@@ -60,9 +60,12 @@ def handle_input(length, command):
         print(f"{command} is not a valid input")
 
 def handle_movement(command):
-    attribute = command.append("_to")
-    if hasattr(Room, attribute):
-        
+    attribute = command + "_to"
+    if hasattr(player.current_room, attribute):
+        room_attribute = getattr(player.current_room, attribute)
+        player.current_room = room_attribute
+    else:
+        print("that movement is not allowed.")    
 while True:
     if player.name == None:
         player.name = input("Hello traveler, what is your name?")
