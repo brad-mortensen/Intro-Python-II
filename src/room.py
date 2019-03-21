@@ -8,7 +8,7 @@ class Room:
         self.description = description
         self.items = items
     def __repr__(self):
-        return f"\n\n\n\n{self.name}.\n\n{self.description}\n\nItems in room: {self.items}\n\n\n\n"
+        return f"\033[1;35;40m \n\n{self.name}.\n\n{self.description}\n\n \033[1;32;40m Items in room: {self.items}\n\n"
     def add_to_room(self, item):
         self.items.append(item)
 
