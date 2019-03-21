@@ -67,24 +67,23 @@ def handle_input(length, command):
 def handle_movement(command):
     attribute = command + "_to"
     if cmd == "i" or cmd == "inventory":
-        print(f"\033[1;30;40m {player.name}\'s inventory:", player.inventory)
+        print(f"\033[1;30;40m {player.name}\'s inventory: {player.inventory}")
     elif hasattr(player.current_room, attribute):
         room_attribute = getattr(player.current_room, attribute)
-        player.current_room = room_attribute
-        print(f"{player.current_room}")
-    
+        player.current_room = room_attribute  
     else:
         print("\n\nthat movement is not allowed.\n\n") 
 
 def handle_grab_drop(command):
     split = command.lower().split(" ")
-    if split[0] == 'grab' and split[1] == player.current_room.items[0].name:
-        player.get_item(player.current_room.items[0])
-        player.current_room.remove_from_room(player.current_room.items[0])
-    elif split[0] == 'drop' and split[1] == player.inventory[0].name:
-        player.current_room.add_to_room(player.inventory[0]) 
-        player.drop_item(player.inventory[0])
-        
+    if split[0] == 'grab' and item[split[1]] in player.current_room.items:
+        player.get_item(item[split[1]])
+        print(f"\033[1;30;40m {player.name}\'s inventory: {player.inventory}")
+        player.current_room.remove_from_room(item[split[1]])
+    elif split[0] == 'drop' and item[split[1]] in player.inventory:
+        player.current_room.add_to_room(item[split[1]]) 
+        player.drop_item(item[split[1]])
+        print(f"\033[1;31;40m Items in room: {player.current_room.items}\n\n")
     else:
         print(f"{split[1]} aint there")       
 
@@ -92,7 +91,7 @@ def handle_grab_drop(command):
 while True:
     if player.name == None:        
         player.name = input("\033[1;31;40m \n\nHello traveler, what is your name?\n\n")
-        print(f"{player.current_room}")
+    print(f"_________________________________{player.current_room}")    
     cmd = input(f"\033[1;33;40m \nWhat do you want to do {player.name}?\n\n")
     length = len(cmd.split(" "))
     if cmd == "q":
