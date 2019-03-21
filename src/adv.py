@@ -70,7 +70,8 @@ def handle_movement(command):
         print(f"\033[1;30;40m {player.name}\'s inventory: {player.inventory}")
     elif hasattr(player.current_room, attribute):
         room_attribute = getattr(player.current_room, attribute)
-        player.current_room = room_attribute  
+        player.current_room = room_attribute
+        print(f"_________________________________{player.current_room}")  
     else:
         print("\n\nthat movement is not allowed.\n\n") 
 
@@ -91,7 +92,7 @@ def handle_grab_drop(command):
 while True:
     if player.name == None:        
         player.name = input("\033[1;31;40m \n\nHello traveler, what is your name?\n\n")
-    print(f"_________________________________{player.current_room}")    
+        print(f"_________________________________{player.current_room}")    
     cmd = input(f"\033[1;33;40m \nWhat do you want to do {player.name}?\n\n")
     length = len(cmd.split(" "))
     if cmd == "q":
