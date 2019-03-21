@@ -10,6 +10,7 @@ class Player:
 
     def get_item(self, item):
         self.inventory.append(item)
+        print(f"Added {item} to inventory")
 
     def drop_item(self, item):
         self.inventory.remove(item)    

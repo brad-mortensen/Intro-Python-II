@@ -12,19 +12,19 @@ item = {
 }
 
 room = {
-    'outside':  Room("Outside Cave Entrance", "North of you, the cave mount beckons.", item["bone"]),
+    'outside':  Room("Outside Cave Entrance", "North of you, the cave mount beckons.", [item["bone"]]),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
-passages run north and east.""", item["sword"]),
+passages run north and east.""", [item["sword"]]),
 
-    'overlook': Room("Grand Overlook", """A steep cliff appears before you, falling into the darkness. Ahead to the north, a light flickers in the distance, but there is no way across the chasm.""", item["candy"]),
+    'overlook': Room("Grand Overlook", """A steep cliff appears before you, falling into the darkness. Ahead to the north, a light flickers in the distance, but there is no way across the chasm.""", [item["candy"]]),
 
     'narrow':   Room("Narrow Passage", """The narrow passage bends here from west
-to north. The smell of gold permeates the air.""", item["shield"]),
+to north. The smell of gold permeates the air.""", [item["shield"]]),
 
     'treasure': Room("Treasure Chamber", """You've found the long-lost treasure
 chamber! Sadly, it has already been completely emptied by
-earlier adventurers. The only exit is to the south.""", item["gold"]),
+earlier adventurers. The only exit is to the south.""", [item["gold"]]),
 }
 
 
@@ -70,11 +70,16 @@ def handle_movement(command):
     if hasattr(player.current_room, attribute):
         room_attribute = getattr(player.current_room, attribute)
         player.current_room = room_attribute
+    elif cmd == "i":
+        print(f"{player.name} inventory:", player.inventory)
     else:
         print("that movement is not allowed.") 
 
 def handle_grab_drop(command):
-    print("split command", command.split(" "))    
+    split = command.lower().split(" ")
+    if split[0] == 'grab' and split[1] in player.current_room.items:
+        player.get_item(split[1])
+        player.current_room.remove_from_room(player.current_room.items.split[1])
 
 # Main Loop
 while True:
@@ -85,5 +90,5 @@ while True:
     length = len(cmd.split(" "))
     if cmd == "q":
         print("thanks for playing")
-        break
+        break        
     handle_input(length, cmd)
