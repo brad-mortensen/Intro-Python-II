@@ -4,11 +4,11 @@ from item import Item
 # Declare all the rooms and items
 
 item = {
-    'sword': Item("Sword", "An Old Broadsword"),
-    'shield': Item("Shield", "For Protection"),
-    'bone': Item("Bone", "A Spooky Skeleton Bone"),
-    'candy': Item("Skittles", "Some Skittles"),
-    'gold': Item("Gold", "A Buncha Dabloons"),
+    'sword': Item("sword", "An Old Broadsword"),
+    'shield': Item("shield", "For Protection"),
+    'bone': Item("bone", "A Spooky Skeleton Bone"),
+    'candy': Item("skittles", "Some Skittles"),
+    'gold': Item("gold", "A Buncha Dabloons"),
 }
 
 room = {
@@ -77,9 +77,15 @@ def handle_movement(command):
 
 def handle_grab_drop(command):
     split = command.lower().split(" ")
-    if split[0] == 'grab' and split[1] in player.current_room.items:
-        player.get_item(split[1])
-        player.current_room.remove_from_room(player.current_room.items.split[1])
+    if split[0] == 'grab' and split[1] == player.current_room.items[0].name:
+        player.get_item(player.current_room.items[0])
+        player.current_room.remove_from_room(player.current_room.items[0])
+    elif split[0] == 'drop' and split[1] == player.inventory[0].name:
+        player.current_room.add_to_room(player.inventory[0]) 
+        player.drop_item(player.inventory[0])
+        
+    else:
+        print(f"{split[1]} aint there")       
 
 # Main Loop
 while True:

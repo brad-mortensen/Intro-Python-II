@@ -13,4 +13,5 @@ class Player:
         print(f"Added {item} to inventory")
 
     def drop_item(self, item):
-        self.inventory.remove(item)    
+        self.inventory.remove(item)
+        print(f"Dropped {item}")    
