@@ -1,29 +1,33 @@
 from room import Room
 from player import Player
 from item import Item
-# Declare all the rooms
-
-room = {
-    'outside':  Room("Outside Cave Entrance", "North of you, the cave mount beckons"),
-
-    'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
-passages run north and east."""),
-
-    'overlook': Room("Grand Overlook", """A steep cliff appears before you, falling into the darkness. Ahead to the north, a light flickers in the distance, but there is no way across the chasm."""),
-
-    'narrow':   Room("Narrow Passage", """The narrow passage bends here from west
-to north. The smell of gold permeates the air."""),
-
-    'treasure': Room("Treasure Chamber", """You've found the long-lost treasure
-chamber! Sadly, it has already been completely emptied by
-earlier adventurers. The only exit is to the south."""),
-}
+# Declare all the rooms and items
 
 item = {
     'sword': Item("Sword", "An Old Broadsword"),
     'shield': Item("Shield", "For Protection"),
+    'bone': Item("Bone", "A Spooky Skeleton Bone"),
+    'candy': Item("Skittles", "Some Skittles"),
     'gold': Item("Gold", "A Buncha Dabloons"),
 }
+
+room = {
+    'outside':  Room("Outside Cave Entrance", "North of you, the cave mount beckons.", item["bone"]),
+
+    'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
+passages run north and east.""", item["sword"]),
+
+    'overlook': Room("Grand Overlook", """A steep cliff appears before you, falling into the darkness. Ahead to the north, a light flickers in the distance, but there is no way across the chasm.""", item["candy"]),
+
+    'narrow':   Room("Narrow Passage", """The narrow passage bends here from west
+to north. The smell of gold permeates the air.""", item["shield"]),
+
+    'treasure': Room("Treasure Chamber", """You've found the long-lost treasure
+chamber! Sadly, it has already been completely emptied by
+earlier adventurers. The only exit is to the south.""", item["gold"]),
+}
+
+
 # Link rooms together
 
 room['outside'].n_to = room['foyer']
@@ -51,11 +55,13 @@ player = Player(None, room['outside'])
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+
+# Handles user Inputs
 def handle_input(length, command):
     if length == 1:
         handle_movement(command)
     elif length == 2:
-        print("length of 2", command)
+        handle_grab_drop(command)
     else: 
         print(f"{command} is not a valid input")
 
@@ -65,14 +71,19 @@ def handle_movement(command):
         room_attribute = getattr(player.current_room, attribute)
         player.current_room = room_attribute
     else:
-        print("that movement is not allowed.")    
+        print("that movement is not allowed.") 
+
+def handle_grab_drop(command):
+    print("split command", command.split(" "))    
+
+# Main Loop
 while True:
     if player.name == None:
         player.name = input("Hello traveler, what is your name?")
     print(f"{player.current_room}")
     cmd = input(f"\nWhat do you want to do {player.name}?")
-    parsed = len(cmd.split(" "))
+    length = len(cmd.split(" "))
     if cmd == "q":
         print("thanks for playing")
         break
-    handle_input(parsed, cmd)
+    handle_input(length, cmd)
