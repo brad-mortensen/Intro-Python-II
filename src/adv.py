@@ -7,7 +7,7 @@ item = {
     'sword': Item("sword", "An Old Broadsword"),
     'shield': Item("shield", "For Protection"),
     'bone': Item("bone", "A Spooky Skeleton Bone"),
-    'candy': Item("skittles", "Some Skittles"),
+    'candy': Item("candy", "Some Skittles"),
     'gold': Item("gold", "A Buncha Dabloons"),
 }
 
